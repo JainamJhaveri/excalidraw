@@ -1,8 +1,8 @@
-import { defineConfig, loadEnv } from "vite";
+import {defineConfig, loadEnv} from "vite";
 import react from "@vitejs/plugin-react";
 import svgrPlugin from "vite-plugin-svgr";
-import { ViteEjsPlugin } from "vite-plugin-ejs";
-import { VitePWA } from "vite-plugin-pwa";
+import {ViteEjsPlugin} from "vite-plugin-ejs";
+import {VitePWA} from "vite-plugin-pwa";
 import checker from "vite-plugin-checker";
 
 // To load .env.local variables
@@ -18,6 +18,7 @@ export default defineConfig({
   //more located in parallel with the vite.config.ts file but in parent dir
   envDir: "../",
   build: {
+    chunkSizeWarningLimit: 1600,
     outDir: "build",
     rollupOptions: {
       output: {
@@ -46,7 +47,7 @@ export default defineConfig({
       eslint:
         envVars.VITE_APP_ENABLE_ESLINT === "false"
           ? undefined
-          : { lintCommand: 'eslint "./**/*.{js,ts,tsx}"' },
+          : {lintCommand: 'eslint "./**/*.{js,ts,tsx}"'},
       overlay: {
         initialIsOpen: envVars.VITE_APP_COLLAPSE_OVERLAY === "false",
         badgeStyle: "margin-bottom: 4rem; margin-left: 1rem",
