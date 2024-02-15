@@ -270,6 +270,7 @@ import {
   updateStable,
   addEventListener,
   normalizeEOL,
+  getDateTime,
 } from "../utils";
 import {
   createSrcDoc,
@@ -619,7 +620,7 @@ class App extends React.Component<AppProps, AppState> {
       gridModeEnabled = false,
       objectsSnapModeEnabled = false,
       theme = defaultAppState.theme,
-      name = defaultAppState.name,
+      name = `${t("labels.untitled")}-${getDateTime()}`,
     } = props;
     this.state = {
       ...defaultAppState,
@@ -662,6 +663,7 @@ class App extends React.Component<AppProps, AppState> {
         getSceneElements: this.getSceneElements,
         getAppState: () => this.state,
         getFiles: () => this.files,
+        getName: this.getName,
         registerAction: (action: Action) => {
           this.actionManager.registerAction(action);
         },
@@ -1410,6 +1412,13 @@ class App extends React.Component<AppProps, AppState> {
     });
   };
 
+  private toggleOverscrollBehavior(event: React.PointerEvent) {
+    // when pointer inside editor, disable overscroll behavior to prevent
+    // panning to trigger history back/forward on MacOS Chrome
+    document.documentElement.style.overscrollBehaviorX =
+      event.type === "pointerenter" ? "none" : "auto";
+  }
+
   public render() {
     const selectedElements = this.scene.getSelectedElements(this.state);
     const { renderTopRightUI, renderCustomStats } = this.props;
@@ -1463,6 +1472,8 @@ class App extends React.Component<AppProps, AppState> {
         onKeyDown={
           this.props.handleKeyboardGlobally ? undefined : this.onKeyDown
         }
+        onPointerEnter={this.toggleOverscrollBehavior}
+        onPointerLeave={this.toggleOverscrollBehavior}
       >
         <AppContext.Provider value={this}>
           <AppPropsContext.Provider value={this.props}>
@@ -1725,7 +1736,7 @@ class App extends React.Component<AppProps, AppState> {
       this.files,
       {
         exportBackground: this.state.exportBackground,
-        name: this.state.name,
+        name: this.getName(),
         viewBackgroundColor: this.state.viewBackgroundColor,
         exportingFrame: opts.exportingFrame,
       },
@@ -2124,7 +2135,7 @@ class App extends React.Component<AppProps, AppState> {
         let gridSize = actionResult?.appState?.gridSize || null;
         const theme =
           actionResult?.appState?.theme || this.props.theme || THEME.LIGHT;
-        let name = actionResult?.appState?.name ?? this.state.name;
+        const name = actionResult?.appState?.name ?? this.state.name;
         const errorMessage =
           actionResult?.appState?.errorMessage ?? this.state.errorMessage;
         if (typeof this.props.viewModeEnabled !== "undefined") {
@@ -2137,10 +2148,6 @@ class App extends React.Component<AppProps, AppState> {
 
         if (typeof this.props.gridModeEnabled !== "undefined") {
           gridSize = this.props.gridModeEnabled ? GRID_SIZE : null;
-        }
-
-        if (typeof this.props.name !== "undefined") {
-          name = this.props.name;
         }
 
         editingElement =
@@ -2455,6 +2462,7 @@ class App extends React.Component<AppProps, AppState> {
     isSomeElementSelected.clearCache();
     selectGroupsForSelectedElements.clearCache();
     touchTimeout = 0;
+    document.documentElement.style.overscrollBehaviorX = "";
   }
 
   private onResize = withBatchedUpdates(() => {
@@ -2696,12 +2704,6 @@ class App extends React.Component<AppProps, AppState> {
     if (prevProps.gridModeEnabled !== this.props.gridModeEnabled) {
       this.setState({
         gridSize: this.props.gridModeEnabled ? GRID_SIZE : null,
-      });
-    }
-
-    if (this.props.name && prevProps.name !== this.props.name) {
-      this.setState({
-        name: this.props.name,
       });
     }
 
@@ -4110,6 +4112,14 @@ class App extends React.Component<AppProps, AppState> {
     // only work on touch screens, so checking for >= pointers means we're on a
     // touchscreen
     return gesture.pointers.size >= 2;
+  };
+
+  public getName = () => {
+    return (
+      this.state.name ||
+      this.props.name ||
+      `${t("labels.untitled")}-${getDateTime()}`
+    );
   };
 
   // fires only on Safari
