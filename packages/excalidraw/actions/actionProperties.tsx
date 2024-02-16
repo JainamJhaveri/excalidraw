@@ -95,6 +95,9 @@ import {
 import { hasStrokeColor } from "../scene/comparisons";
 import { arrayToMap, getShortcutKey } from "../utils";
 import { register } from "./register";
+import * as Popover from "@radix-ui/react-popover";
+import { useRef, useState } from "react";
+import { useDevice, useExcalidrawContainer } from "../components/App";
 
 const FONT_SIZE_RELATIVE_INCREASE_STEP = 0.1;
 
@@ -709,7 +712,6 @@ export const actionIncreaseFontSize = register({
     );
   },
 });
-
 export const actionChangeFontFamily = register({
   name: "changeFontFamily",
   trackEvent: false,
@@ -733,7 +735,6 @@ export const actionChangeFontFamily = register({
             );
             return newElement;
           }
-
           return oldElement;
         },
         true,
@@ -771,7 +772,7 @@ export const actionChangeFontFamily = register({
         testId: "font-family-code",
       },
     ];
-
+    const [openPopup, setOpenPopup] = useState(false);
     return (
       <fieldset>
         <legend>{t("labels.fontFamily")}</legend>
@@ -807,10 +808,123 @@ export const actionChangeFontFamily = register({
           )}
           onChange={(value) => updateData(value)}
         />
+        <Popover.Root
+          open={openPopup}
+          onOpenChange={() => {
+            setOpenPopup(!openPopup);
+          }}
+        >
+          <Popover.Trigger
+            style={{
+              marginTop: "10px",
+              border: "none",
+              padding: 10,
+              borderRadius: "5px",
+              backgroundColor: "#E0DFFF",
+              cursor: "pointer",
+            }}
+          >
+            Custom Fonts
+          </Popover.Trigger>{" "}
+          <CustomFontPopupContent updateData={updateData} />
+        </Popover.Root>
       </fieldset>
     );
   },
 });
+
+const CustomFontPopupContent = ({ updateData }: { updateData: any }) => {
+  const options: {
+    value: FontFamilyValues;
+    text: string;
+    fontFamilyText: string;
+    testId: string;
+  }[] = [
+    {
+      value: FONT_FAMILY["Bebas Neue"],
+      text: t("labels.bebasNeue"),
+      fontFamilyText: "Bebas Neue",
+      testId: "font-family-bebas-sans",
+    },
+    {
+      value: FONT_FAMILY["Times New Roman"],
+      text: t("labels.timesNewRoman"),
+      fontFamilyText: "Times New Roman",
+      testId: "font-family-timesNewRoman",
+    },
+  ];
+  const { container } = useExcalidrawContainer();
+  const device = useDevice();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const focusPickerContent = () => {
+    popoverRef.current
+      ?.querySelector<HTMLDivElement>(".color-picker-content")
+      ?.focus();
+  };
+  return (
+    <Popover.Portal container={container}>
+      <Popover.Content
+        ref={popoverRef}
+        className="focus-visible-none"
+        data-prevent-outside-click
+        onFocusOutside={(event) => {
+          focusPickerContent();
+          event.preventDefault();
+        }}
+        alignOffset={-16}
+        sideOffset={20}
+        style={{
+          zIndex: "var(--zIndex-layerUI)",
+          backgroundColor: "var(--popup-bg-color)",
+          maxWidth: "300px",
+          maxHeight: window.innerHeight,
+          padding: "12px",
+          borderRadius: "8px",
+          boxSizing: "border-box",
+          overflowY: "auto",
+          boxShadow:
+            "0px 7px 14px rgba(0, 0, 0, 0.05), 0px 0px 3.12708px rgba(0, 0, 0, 0.0798), 0px 0px 0.931014px rgba(0, 0, 0, 0.1702)",
+        }}
+        side={
+          device.editor.isMobile && !device.viewport.isLandscape
+            ? "bottom"
+            : "right"
+        }
+        align={
+          device.editor.isMobile && !device.viewport.isLandscape
+            ? "center"
+            : "start"
+        }
+      >
+        <h4
+          style={{
+            margin: 5,
+            textAlign: "center",
+            borderBottom: "1px solid black",
+            paddingBottom: 4,
+          }}
+        >
+          Custom fonts
+        </h4>
+        <div style={{ height: 200, overflowY: "scroll" }}>
+          {options.map((opt, i) => (
+            <button
+              className="custom__font__btn"
+              style={{
+                fontFamily: opt.fontFamilyText,
+              }}
+              onClick={() => {
+                updateData(opt.value);
+              }}
+            >
+              {opt.text}
+            </button>
+          ))}
+        </div>
+      </Popover.Content>
+    </Popover.Portal>
+  );
+};
 
 export const actionChangeTextAlign = register({
   name: "changeTextAlign",

@@ -110,7 +110,9 @@ export const FONT_FAMILY = {
   Virgil: 1,
   Helvetica: 2,
   Cascadia: 3,
-  Assistant: 4,
+  "Bebas Neue": 4,
+  "Times New Roman": 5,
+  Assistant: 6,
 };
 
 export const THEME = {

@@ -90,3 +90,18 @@
     }
   }
 }
+
+.custom__font__btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: #fff;
+}
+.custom__font__btn:hover {
+  background-color: #f2f2f2;
+}
