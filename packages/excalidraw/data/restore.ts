@@ -31,6 +31,8 @@ import {
   ROUNDNESS,
   DEFAULT_SIDEBAR,
   DEFAULT_ELEMENT_PROPS,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_FONT_WEIGHT,
 } from "../constants";
 import { getDefaultAppState } from "../appState";
 import { LinearElementEditor } from "../element/linearElementEditor";
@@ -216,6 +218,8 @@ const restoreElement = (
         fontSize,
         fontFamily,
         text,
+        fontStyle: element.fontStyle || DEFAULT_FONT_STYLE,
+        fontWeight: element.fontWeight || DEFAULT_FONT_WEIGHT,
         textAlign: element.textAlign || DEFAULT_TEXT_ALIGN,
         verticalAlign: element.verticalAlign || DEFAULT_VERTICAL_ALIGN,
         containerId: element.containerId ?? null,

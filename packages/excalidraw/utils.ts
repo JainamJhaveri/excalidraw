@@ -6,7 +6,12 @@ import {
   isDarwin,
   WINDOWS_EMOJI_FALLBACK_FONT,
 } from "./constants";
-import { FontFamilyValues, FontString } from "./element/types";
+import {
+  FontFamilyValues,
+  FontString,
+  FontStyleValues,
+  FontWeightValues,
+} from "./element/types";
 import {
   ActiveTool,
   AppState,
@@ -98,11 +103,17 @@ export const getFontFamilyString = ({
 export const getFontString = ({
   fontSize,
   fontFamily,
+  fontWeight,
+  fontStyle,
 }: {
   fontSize: number;
   fontFamily: FontFamilyValues;
+  fontWeight: FontWeightValues;
+  fontStyle: FontStyleValues;
 }) => {
-  return `${fontSize}px ${getFontFamilyString({ fontFamily })}` as FontString;
+  return `${fontStyle} ${fontWeight} ${fontSize}px ${getFontFamilyString({
+    fontFamily,
+  })}` as FontString;
 };
 
 export const debounce = <T extends any[]>(

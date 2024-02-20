@@ -1416,6 +1416,8 @@ export const renderElementToSvg = (
           text.setAttribute("y", `${i * lineHeightPx}`);
           text.setAttribute("font-family", getFontFamilyString(element));
           text.setAttribute("font-size", `${element.fontSize}px`);
+          text.setAttribute("font-style", `${element.fontStyle}`);
+          text.setAttribute("font-weight", `${element.fontWeight}`);
           text.setAttribute("fill", element.strokeColor);
           text.setAttribute("text-anchor", textAnchor);
           text.setAttribute("style", "white-space: pre;");

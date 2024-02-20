@@ -1344,6 +1344,8 @@ class App extends React.Component<AppProps, AppState> {
               borderRadius: 4,
               boxShadow: "inset 0 0 0 1px var(--color-primary)",
               fontFamily: "Assistant",
+              fontStyle: "normal",
+              fontWeight: "normal",
               fontSize: "14px",
               transform: `translate(-${FRAME_NAME_EDIT_PADDING}px, ${FRAME_NAME_EDIT_PADDING}px)`,
               color: "var(--color-gray-80)",
@@ -1383,6 +1385,7 @@ class App extends React.Component<AppProps, AppState> {
             left: `${x1 - this.state.offsetLeft}px`,
             zIndex: 2,
             fontSize: FRAME_STYLE.nameFontSize,
+            fontWeight: "normal",
             color: isDarkTheme
               ? FRAME_STYLE.nameColorDarkTheme
               : FRAME_STYLE.nameColorLightTheme,
@@ -3289,6 +3292,8 @@ class App extends React.Component<AppProps, AppState> {
       text,
       fontSize: this.state.currentItemFontSize,
       fontFamily: this.state.currentItemFontFamily,
+      fontStyle: this.state.currentItemFontStyle,
+      fontWeight: this.state.currentItemFontWeight,
       textAlign: this.state.currentItemTextAlign,
       verticalAlign: DEFAULT_VERTICAL_ALIGN,
       locked: false,
@@ -4455,6 +4460,10 @@ class App extends React.Component<AppProps, AppState> {
     const lineHeight =
       existingTextElement?.lineHeight || getDefaultLineHeight(fontFamily);
     const fontSize = this.state.currentItemFontSize;
+    const fontStyle =
+      existingTextElement?.fontStyle || this.state.currentItemFontStyle;
+    const fontWeight =
+      existingTextElement?.fontWeight || this.state.currentItemFontStyle;
 
     if (
       !existingTextElement &&
@@ -4465,6 +4474,8 @@ class App extends React.Component<AppProps, AppState> {
       const fontString = {
         fontSize,
         fontFamily,
+        fontStyle,
+        fontWeight,
       };
       const minWidth = getApproxMinLineWidth(
         getFontString(fontString),
@@ -4510,6 +4521,8 @@ class App extends React.Component<AppProps, AppState> {
           text: "",
           fontSize,
           fontFamily,
+          fontStyle,
+          fontWeight,
           textAlign: parentCenterPosition
             ? "center"
             : this.state.currentItemTextAlign,

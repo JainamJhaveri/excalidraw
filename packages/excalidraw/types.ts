@@ -11,6 +11,8 @@ import {
   Arrowhead,
   ChartType,
   FontFamilyValues,
+  FontStyleValues,
+  FontWeightValues,
   FileId,
   ExcalidrawImageElement,
   Theme,
@@ -237,6 +239,8 @@ export interface AppState {
   currentItemRoughness: number;
   currentItemOpacity: number;
   currentItemFontFamily: FontFamilyValues;
+  currentItemFontStyle: FontStyleValues;
+  currentItemFontWeight: FontWeightValues;
   currentItemFontSize: number;
   currentItemTextAlign: TextAlign;
   currentItemStartArrowhead: Arrowhead | null;
