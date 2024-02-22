@@ -232,7 +232,14 @@ export {
 } from "../utils/export";
 export { isLinearElement } from "./element/typeChecks";
 
-export { FONT_FAMILY, THEME, MIME_TYPES, ROUNDNESS } from "./constants";
+export {
+  FONT_FAMILY,
+  THEME,
+  MIME_TYPES,
+  ROUNDNESS,
+  FONT_STYLE,
+  FONT_WEIGHT,
+} from "./constants";
 
 export {
   mutateElement,

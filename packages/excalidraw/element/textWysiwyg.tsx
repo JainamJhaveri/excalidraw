@@ -334,6 +334,8 @@ export const textWysiwyg = ({
       const font = getFontString({
         fontSize: app.state.currentItemFontSize,
         fontFamily: app.state.currentItemFontFamily,
+        fontStyle: app.state.currentItemFontStyle,
+        fontWeight: app.state.currentItemFontWeight,
       });
       if (container) {
         const boundTextElement = getBoundTextElement(

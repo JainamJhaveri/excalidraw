@@ -81,11 +81,13 @@ export class Fonts {
         ...new Set(
           elements
             .filter((element) => isTextElement(element))
-            .map((element) => (element as ExcalidrawTextElement).fontFamily),
+            .map((element) => element as ExcalidrawTextElement),
         ),
-      ].map((fontFamily) => {
+      ].map((element) => {
         const fontString = getFontString({
-          fontFamily,
+          fontFamily: element.fontFamily,
+          fontStyle: element.fontStyle,
+          fontWeight: element.fontWeight,
           fontSize: 16,
         });
         if (!document.fonts?.check?.(fontString)) {

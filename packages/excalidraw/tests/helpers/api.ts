@@ -113,6 +113,8 @@ export class API {
     // text props
     text?: T extends "text" ? ExcalidrawTextElement["text"] : never;
     fontSize?: T extends "text" ? ExcalidrawTextElement["fontSize"] : never;
+    fontStyle?: T extends "text" ? ExcalidrawTextElement["fontStyle"] : never;
+    fontWeight?: T extends "text" ? ExcalidrawTextElement["fontWeight"] : never;
     fontFamily?: T extends "text" ? ExcalidrawTextElement["fontFamily"] : never;
     textAlign?: T extends "text" ? ExcalidrawTextElement["textAlign"] : never;
     verticalAlign?: T extends "text"

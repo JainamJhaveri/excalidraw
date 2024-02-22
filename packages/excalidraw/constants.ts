@@ -1,8 +1,12 @@
 import cssVariables from "./css/variables.module.scss";
-import {AppProps} from "./types";
-import {ExcalidrawElement, FontFamilyValues} from "./element/types";
-import {COLOR_PALETTE} from "./colors";
-
+import { AppProps } from "./types";
+import {
+  ExcalidrawElement,
+  FontFamilyValues,
+  FontStyleValues,
+  FontWeightValues,
+} from "./element/types";
+import { COLOR_PALETTE } from "./colors";
 export const isDarwin = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
 export const isWindows = /^Win/.test(navigator.platform);
 export const isAndroid = /\b(android)\b/i.test(navigator.userAgent);
@@ -112,18 +116,29 @@ export const FONT_FAMILY = {
   Helvetica: 2,
   Cascadia: 3,
   "Bebas Neue": 4,
-  "Lato": 5,
-  "Merriweather": 6,
-  "Montserrat": 7,
-  "Mulish": 8,
+  Lato: 5,
+  Merriweather: 6,
+  Montserrat: 7,
+  Mulish: 8,
   "Noto Sans": 9,
   "Open Sans": 10,
-  "Oswald": 11,
+  Oswald: 11,
   "Playfair Display": 12,
-  "Poppins": 13,
-  "Roboto": 14,
+  Poppins: 13,
+  Roboto: 14,
   "Times New Roman": 15,
   Assistant: 16,
+};
+
+export const FONT_WEIGHT = {
+  thin: "lighter",
+  normal: "normal",
+  bold: "bold",
+};
+
+export const FONT_STYLE = {
+  normal: "normal",
+  italic: "italic",
 };
 
 export const THEME = {
@@ -152,6 +167,8 @@ export const WINDOWS_EMOJI_FALLBACK_FONT = "Segoe UI Emoji";
 export const MIN_FONT_SIZE = 1;
 export const DEFAULT_FONT_SIZE = 20;
 export const DEFAULT_FONT_FAMILY: FontFamilyValues = FONT_FAMILY.Virgil;
+export const DEFAULT_FONT_STYLE: FontStyleValues = "normal";
+export const DEFAULT_FONT_WEIGHT: FontWeightValues = "normal";
 export const DEFAULT_TEXT_ALIGN = "left";
 export const DEFAULT_VERTICAL_ALIGN = "top";
 export const DEFAULT_VERSION = "{version}";
@@ -235,7 +252,7 @@ export const DEFAULT_UI_OPTIONS: AppProps["UIOptions"] = {
   canvasActions: {
     changeViewBackgroundColor: true,
     clearCanvas: true,
-    export: {saveFileToDisk: true},
+    export: { saveFileToDisk: true },
     loadScene: true,
     saveToActiveFile: true,
     toggleTheme: null,

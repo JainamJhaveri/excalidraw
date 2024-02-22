@@ -23,6 +23,7 @@ import { AppState, BinaryFiles } from "../types";
 import {
   DEFAULT_EXPORT_PADDING,
   FONT_FAMILY,
+  FONT_STYLE,
   FRAME_STYLE,
   SVG_NS,
   THEME_FILTER,
@@ -80,6 +81,8 @@ const truncateText = (element: ExcalidrawTextElement, maxWidth: number) => {
   ctx.font = getFontString({
     fontFamily: element.fontFamily,
     fontSize: element.fontSize,
+    fontWeight: element.fontWeight,
+    fontStyle: element.fontStyle,
   });
 
   let text = element.text;
@@ -126,6 +129,7 @@ const addFrameLabelsAsTextElements = (
         x: element.x,
         y: element.y - FRAME_STYLE.nameOffsetY,
         fontFamily: FONT_FAMILY.Assistant,
+        fontStyle: FONT_STYLE.normal,
         fontSize: FRAME_STYLE.nameFontSize,
         lineHeight:
           FRAME_STYLE.nameLineHeight as ExcalidrawTextElement["lineHeight"],

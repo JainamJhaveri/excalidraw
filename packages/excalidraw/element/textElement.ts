@@ -17,6 +17,8 @@ import {
   BOUND_TEXT_PADDING,
   DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_FONT_WEIGHT,
   FONT_FAMILY,
   isSafari,
   TEXT_ALIGN,
@@ -63,6 +65,8 @@ export const redrawTextBoundingBox = (
     width: textElement.width,
     height: textElement.height,
     baseline: textElement.baseline,
+    fontStyle: textElement.fontStyle,
+    fontWeight: textElement.fontWeight,
   };
 
   boundTextUpdates.text = textElement.text;
@@ -298,7 +302,9 @@ export const measureText = (
     // lines would be stripped from computation
     .map((x) => x || " ")
     .join("\n");
-  const fontSize = parseFloat(font);
+  const fontSizeMatch = font.match(/(\d+(\.\d+)?)/); // Regular expression to match a number
+  const fontSize = fontSizeMatch ? parseFloat(fontSizeMatch[0]) : 16;
+
   const height = getTextHeight(text, fontSize, lineHeight);
   const width = getTextWidth(text, font);
   const baseline = measureBaseline(text, font, lineHeight);
@@ -944,6 +950,8 @@ export const isMeasureTextSupported = () => {
     getFontString({
       fontSize: DEFAULT_FONT_SIZE,
       fontFamily: DEFAULT_FONT_FAMILY,
+      fontWeight: DEFAULT_FONT_WEIGHT,
+      fontStyle: DEFAULT_FONT_STYLE,
     }),
   );
   return width > 0;

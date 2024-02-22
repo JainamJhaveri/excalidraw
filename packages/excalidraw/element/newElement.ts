@@ -11,6 +11,8 @@ import {
   Arrowhead,
   ExcalidrawFreeDrawElement,
   FontFamilyValues,
+  FontWeightValues,
+  FontStyleValues,
   ExcalidrawTextContainer,
   ExcalidrawFrameElement,
   ExcalidrawEmbeddableElement,
@@ -45,6 +47,8 @@ import {
   DEFAULT_TEXT_ALIGN,
   DEFAULT_VERTICAL_ALIGN,
   VERTICAL_ALIGN,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_FONT_WEIGHT,
 } from "../constants";
 import { MarkOptional, Merge, Mutable } from "../utility-types";
 
@@ -214,6 +218,8 @@ export const newTextElement = (
     text: string;
     fontSize?: number;
     fontFamily?: FontFamilyValues;
+    fontStyle?: FontStyleValues;
+    fontWeight?: FontWeightValues;
     textAlign?: TextAlign;
     verticalAlign?: VerticalAlign;
     containerId?: ExcalidrawTextContainer["id"] | null;
@@ -223,11 +229,13 @@ export const newTextElement = (
 ): NonDeleted<ExcalidrawTextElement> => {
   const fontFamily = opts.fontFamily || DEFAULT_FONT_FAMILY;
   const fontSize = opts.fontSize || DEFAULT_FONT_SIZE;
+  const fontStyle = opts.fontStyle || DEFAULT_FONT_STYLE;
+  const fontWeight = opts.fontWeight || DEFAULT_FONT_WEIGHT;
   const lineHeight = opts.lineHeight || getDefaultLineHeight(fontFamily);
   const text = normalizeText(opts.text);
   const metrics = measureText(
     text,
-    getFontString({ fontFamily, fontSize }),
+    getFontString({ fontFamily, fontSize, fontWeight, fontStyle }),
     lineHeight,
   );
   const textAlign = opts.textAlign || DEFAULT_TEXT_ALIGN;
@@ -243,6 +251,8 @@ export const newTextElement = (
       text,
       fontSize,
       fontFamily,
+      fontStyle,
+      fontWeight,
       textAlign,
       verticalAlign,
       x: opts.x - offsets.x,
