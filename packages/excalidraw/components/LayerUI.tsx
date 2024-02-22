@@ -210,32 +210,33 @@ const LayerUI = ({
     </div>
   );
 
-  const renderSelectedShapeActions = () => (
-    <Draggable handle=".edit-panel-header">
-      <Section
-        heading="selectedShapeActions"
-        className={clsx("selected-shape-actions zen-mode-transition", {
-          "transition-left": appState.zenModeEnabled,
-        })}
-      >
-        <Island
-          className={CLASSES.SHAPE_ACTIONS_MENU}
-          padding={2}
-          style={{
-            // we want to make sure this doesn't overflow so subtracting the
-            // approximate height of hamburgerMenu + footer
-            maxHeight: `${appState.height - 166}px`,
-          }}
+  const renderSelectedShapeActions = () =>
+    !appState.zenModeEnabled && (
+      <Draggable handle=".edit-panel-header">
+        <Section
+          heading="selectedShapeActions"
+          className={clsx("selected-shape-actions zen-mode-transition", {
+            "transition-left": appState.zenModeEnabled,
+          })}
         >
-          <SelectedShapeActions
-            appState={appState}
-            elementsMap={app.scene.getNonDeletedElementsMap()}
-            renderAction={actionManager.renderAction}
-          />
-        </Island>
-      </Section>
-    </Draggable>
-  );
+          <Island
+            className={CLASSES.SHAPE_ACTIONS_MENU}
+            padding={2}
+            style={{
+              // we want to make sure this doesn't overflow so subtracting the
+              // approximate height of hamburgerMenu + footer
+              maxHeight: `${appState.height - 166}px`,
+            }}
+          >
+            <SelectedShapeActions
+              appState={appState}
+              elementsMap={app.scene.getNonDeletedElementsMap()}
+              renderAction={actionManager.renderAction}
+            />
+          </Island>
+        </Section>
+      </Draggable>
+    );
 
   const renderFixedSideContainer = () => {
     const shouldRenderSelectedShapeActions = showSelectedShapeActions(

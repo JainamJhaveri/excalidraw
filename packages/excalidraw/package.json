@@ -1,6 +1,6 @@
 {
   "name": "excalidraw-customization",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/prod/index.js",
   "module": "./dist/prod/index.js",
   "exports": {
