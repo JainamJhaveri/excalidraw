@@ -256,6 +256,7 @@ export interface AppState {
   isRotating: boolean;
   zoom: Zoom;
   openMenu: "canvas" | "shape" | null;
+  toggleToolBar: boolean;
   openPopup: "canvasBackground" | "elementBackground" | "elementStroke" | null;
   openSidebar: { name: SidebarName; tab?: SidebarTabName } | null;
   openDialog:

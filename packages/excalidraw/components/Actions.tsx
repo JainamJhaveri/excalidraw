@@ -93,7 +93,19 @@ export const SelectedShapeActions = ({
   }
 
   return (
-    <div className="panelColumn">
+    <div className="panelColumn" style={{ paddingTop: 0 }}>
+      <div
+        style={{
+          cursor: "grab",
+          textAlign: "center",
+        }}
+        className="edit-panel-header"
+      >
+        <h4 style={{ padding: 0, margin: 0 }}>Editor</h4>
+        <p style={{ padding: 0, margin: 0, fontSize: 12, color: "lightgray" }}>
+          hold and drag from here
+        </p>
+      </div>
       <div>
         {((hasStrokeColor(appState.activeTool.type) &&
           appState.activeTool.type !== "image" &&

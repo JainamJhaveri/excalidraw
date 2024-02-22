@@ -1019,6 +1019,7 @@ export const actionChangeFontWeight = register({
             redrawTextBoundingBox(
               newElement,
               app.scene.getContainerElement(oldElement),
+              app.scene.getNonDeletedElementsMap(),
             );
             return newElement;
           }
@@ -1113,8 +1114,8 @@ export const actionChangeFontStyle = register({
             );
             redrawTextBoundingBox(
               newElement,
-
               app.scene.getContainerElement(oldElement),
+              app.scene.getNonDeletedElementsMap(),
             );
             return newElement;
           }

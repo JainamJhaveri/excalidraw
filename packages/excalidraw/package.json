@@ -1,6 +1,6 @@
 {
   "name": "excalidraw-customization",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./dist/prod/index.js",
   "module": "./dist/prod/index.js",
   "exports": {
@@ -79,6 +79,7 @@
     "png-chunks-extract": "1.0.0",
     "points-on-curve": "1.0.1",
     "pwacompat": "2.0.17",
+    "react-draggable": "4.4.6",
     "roughjs": "4.6.4",
     "sass": "1.51.0",
     "tunnel-rat": "0.1.2",

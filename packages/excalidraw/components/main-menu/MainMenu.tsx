@@ -39,7 +39,7 @@ const MainMenu = Object.assign(
             <DropdownMenu.Trigger
               onToggle={() => {
                 setAppState({
-                  openMenu: appState.openMenu === "canvas" ? null : "canvas",
+                  toggleToolBar: !appState.toggleToolBar,
                 });
               }}
               data-testid="main-menu-trigger"
@@ -47,7 +47,7 @@ const MainMenu = Object.assign(
             >
               {HamburgerMenuIcon}
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content
+            {/* <DropdownMenu.Content
               onClickOutside={onClickOutside}
               onSelect={composeEventHandlers(onSelect, () => {
                 setAppState({ openMenu: null });
@@ -64,7 +64,7 @@ const MainMenu = Object.assign(
                   />
                 </fieldset>
               )}
-            </DropdownMenu.Content>
+            </DropdownMenu.Content> */}
           </DropdownMenu>
         </MainMenuTunnel.In>
       );

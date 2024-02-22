@@ -63,6 +63,7 @@ import Scene from "../scene/Scene";
 import { LaserPointerButton } from "./LaserPointerButton";
 import { MagicSettings } from "./MagicSettings";
 import { TTDDialog } from "./TTDDialog/TTDDialog";
+import Draggable from "react-draggable";
 
 interface LayerUIProps {
   actionManager: ActionManager;
@@ -210,28 +211,30 @@ const LayerUI = ({
   );
 
   const renderSelectedShapeActions = () => (
-    <Section
-      heading="selectedShapeActions"
-      className={clsx("selected-shape-actions zen-mode-transition", {
-        "transition-left": appState.zenModeEnabled,
-      })}
-    >
-      <Island
-        className={CLASSES.SHAPE_ACTIONS_MENU}
-        padding={2}
-        style={{
-          // we want to make sure this doesn't overflow so subtracting the
-          // approximate height of hamburgerMenu + footer
-          maxHeight: `${appState.height - 166}px`,
-        }}
+    <Draggable handle=".edit-panel-header">
+      <Section
+        heading="selectedShapeActions"
+        className={clsx("selected-shape-actions zen-mode-transition", {
+          "transition-left": appState.zenModeEnabled,
+        })}
       >
-        <SelectedShapeActions
-          appState={appState}
-          elementsMap={app.scene.getNonDeletedElementsMap()}
-          renderAction={actionManager.renderAction}
-        />
-      </Island>
-    </Section>
+        <Island
+          className={CLASSES.SHAPE_ACTIONS_MENU}
+          padding={2}
+          style={{
+            // we want to make sure this doesn't overflow so subtracting the
+            // approximate height of hamburgerMenu + footer
+            maxHeight: `${appState.height - 166}px`,
+          }}
+        >
+          <SelectedShapeActions
+            appState={appState}
+            elementsMap={app.scene.getNonDeletedElementsMap()}
+            renderAction={actionManager.renderAction}
+          />
+        </Island>
+      </Section>
+    </Draggable>
   );
 
   const renderFixedSideContainer = () => {
@@ -247,7 +250,7 @@ const LayerUI = ({
             {renderCanvasActions()}
             {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
           </Stack.Col>
-          {!appState.viewModeEnabled && (
+          {!appState.viewModeEnabled && appState.toggleToolBar && (
             <Section heading="shapes" className="shapes-section">
               {(heading: React.ReactNode) => (
                 <div style={{ position: "relative" }}>
@@ -267,12 +270,12 @@ const LayerUI = ({
                           "zen-mode": appState.zenModeEnabled,
                         })}
                       >
-                        <HintViewer
+                        {/* <HintViewer
                           appState={appState}
                           isMobile={device.editor.isMobile}
                           device={device}
                           app={app}
-                        />
+                        /> */}
                         {heading}
                         <Stack.Row gap={1}>
                           <PenModeButton
@@ -501,7 +504,7 @@ const LayerUI = ({
           }
         />
       )}
-      {device.editor.isMobile && (
+      {/* {device.editor.isMobile && (
         <MobileMenu
           app={app}
           appState={appState}
@@ -520,54 +523,54 @@ const LayerUI = ({
           renderWelcomeScreen={renderWelcomeScreen}
           UIOptions={UIOptions}
         />
-      )}
-      {!device.editor.isMobile && (
-        <>
-          <div
-            className="layer-ui__wrapper"
-            style={
-              appState.openSidebar &&
-              isSidebarDocked &&
-              device.editor.canFitSidebar
-                ? { width: `calc(100% - ${LIBRARY_SIDEBAR_WIDTH}px)` }
-                : {}
-            }
-          >
-            {renderWelcomeScreen && <tunnels.WelcomeScreenCenterTunnel.Out />}
-            {renderFixedSideContainer()}
-            <Footer
+      )} */}
+      {/* {!device.editor.isMobile && ( */}
+      <>
+        <div
+          className="layer-ui__wrapper"
+          style={
+            appState.openSidebar &&
+            isSidebarDocked &&
+            device.editor.canFitSidebar
+              ? { width: `calc(100% - ${LIBRARY_SIDEBAR_WIDTH}px)` }
+              : {}
+          }
+        >
+          {renderWelcomeScreen && <tunnels.WelcomeScreenCenterTunnel.Out />}
+          {renderFixedSideContainer()}
+          <Footer
+            appState={appState}
+            actionManager={actionManager}
+            showExitZenModeBtn={showExitZenModeBtn}
+            renderWelcomeScreen={renderWelcomeScreen}
+          />
+          {appState.showStats && (
+            <Stats
               appState={appState}
-              actionManager={actionManager}
-              showExitZenModeBtn={showExitZenModeBtn}
-              renderWelcomeScreen={renderWelcomeScreen}
+              setAppState={setAppState}
+              elements={elements}
+              onClose={() => {
+                actionManager.executeAction(actionToggleStats);
+              }}
+              renderCustomStats={renderCustomStats}
             />
-            {appState.showStats && (
-              <Stats
-                appState={appState}
-                setAppState={setAppState}
-                elements={elements}
-                onClose={() => {
-                  actionManager.executeAction(actionToggleStats);
-                }}
-                renderCustomStats={renderCustomStats}
-              />
-            )}
-            {appState.scrolledOutside && (
-              <button
-                className="scroll-back-to-content"
-                onClick={() => {
-                  setAppState((appState) => ({
-                    ...calculateScrollCenter(elements, appState),
-                  }));
-                }}
-              >
-                {t("buttons.scrollBackToContent")}
-              </button>
-            )}
-          </div>
-          {renderSidebars()}
-        </>
-      )}
+          )}
+          {appState.scrolledOutside && (
+            <button
+              className="scroll-back-to-content"
+              onClick={() => {
+                setAppState((appState) => ({
+                  ...calculateScrollCenter(elements, appState),
+                }));
+              }}
+            >
+              {t("buttons.scrollBackToContent")}
+            </button>
+          )}
+        </div>
+        {renderSidebars()}
+      </>
+      {/* )} */}
     </>
   );
 
