@@ -1,7 +1,8 @@
 import cssVariables from "./css/variables.module.scss";
-import { AppProps } from "./types";
-import { ExcalidrawElement, FontFamilyValues } from "./element/types";
-import { COLOR_PALETTE } from "./colors";
+import {AppProps} from "./types";
+import {ExcalidrawElement, FontFamilyValues} from "./element/types";
+import {COLOR_PALETTE} from "./colors";
+
 export const isDarwin = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
 export const isWindows = /^Win/.test(navigator.platform);
 export const isAndroid = /\b(android)\b/i.test(navigator.userAgent);
@@ -111,8 +112,18 @@ export const FONT_FAMILY = {
   Helvetica: 2,
   Cascadia: 3,
   "Bebas Neue": 4,
-  "Times New Roman": 5,
-  Assistant: 6,
+  "Lato": 5,
+  "Merriweather": 6,
+  "Montserrat": 7,
+  "Mulish": 8,
+  "Noto Sans": 9,
+  "Open Sans": 10,
+  "Oswald": 11,
+  "Playfair Display": 12,
+  "Poppins": 13,
+  "Roboto": 14,
+  "Times New Roman": 15,
+  Assistant: 16,
 };
 
 export const THEME = {
@@ -224,7 +235,7 @@ export const DEFAULT_UI_OPTIONS: AppProps["UIOptions"] = {
   canvasActions: {
     changeViewBackgroundColor: true,
     clearCanvas: true,
-    export: { saveFileToDisk: true },
+    export: {saveFileToDisk: true},
     loadScene: true,
     saveToActiveFile: true,
     toggleTheme: null,

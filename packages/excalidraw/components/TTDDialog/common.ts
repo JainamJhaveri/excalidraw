@@ -95,6 +95,7 @@ export const convertMermaidToExcalidraw = async ({
       elements: convertToExcalidrawElements(elements, {
         regenerateIds: true,
       }),
+      // @ts-ignore
       files,
     };
 

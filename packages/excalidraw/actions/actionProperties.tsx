@@ -842,17 +842,77 @@ const CustomFontPopupContent = ({ updateData }: { updateData: any }) => {
     fontFamilyText: string;
     testId: string;
   }[] = [
+    // {
+    //   value: FONT_FAMILY["Bebas Neue"],
+    //   text: t("labels.font_bebas_neue"),
+    //   fontFamilyText: "Bebas Neue",
+    //   testId: "font-family-bebas-sans",
+    // },
     {
-      value: FONT_FAMILY["Bebas Neue"],
-      text: t("labels.bebasNeue"),
-      fontFamilyText: "Bebas Neue",
-      testId: "font-family-bebas-sans",
+      value: FONT_FAMILY["Lato"],
+      text: t("labels.font_lato"),
+      fontFamilyText: "Lato",
+      testId: "font-family-lato",
+    },
+    {
+      value: FONT_FAMILY["Merriweather"],
+      text: t("labels.font_merri_weather"),
+      fontFamilyText: "Merriweather",
+      testId: "font-family-merriweather",
+    },
+    {
+      value: FONT_FAMILY["Montserrat"],
+      text: t("labels.font_montserrat"),
+      fontFamilyText: "Montserrat",
+      testId: "font-family-montserrat",
+    },
+    {
+      value: FONT_FAMILY["Mulish"],
+      text: t("labels.font_mulish"),
+      fontFamilyText: "Mulish",
+      testId: "font-family-mulish",
+    },
+    {
+      value: FONT_FAMILY["Noto Sans"],
+      text: t("labels.font_noto_sans"),
+      fontFamilyText: "Noto Sans",
+      testId: "font-family-noto-sans",
+    },
+    {
+      value: FONT_FAMILY["Open Sans"],
+      text: t("labels.font_open_sans"),
+      fontFamilyText: "Open Sans",
+      testId: "font-family-open-sans",
+    },
+    {
+      value: FONT_FAMILY["Oswald"],
+      text: t("labels.font_oswald"),
+      fontFamilyText: "Oswald",
+      testId: "font-family-oswald",
+    },
+    {
+      value: FONT_FAMILY["Playfair Display"],
+      text: t("labels.font_playfair_display"),
+      fontFamilyText: "Playfair Display",
+      testId: "font-family-playfair-display",
+    },
+    {
+      value: FONT_FAMILY["Poppins"],
+      text: t("labels.font_poppins"),
+      fontFamilyText: "Poppins",
+      testId: "font-family-poppins",
+    },
+    {
+      value: FONT_FAMILY["Roboto"],
+      text: t("labels.font_roboto"),
+      fontFamilyText: "Roboto",
+      testId: "font-family-roboto",
     },
     {
       value: FONT_FAMILY["Times New Roman"],
-      text: t("labels.timesNewRoman"),
+      text: t("labels.font_times_new_roman"),
       fontFamilyText: "Times New Roman",
-      testId: "font-family-timesNewRoman",
+      testId: "font-family-times-new-roman",
     },
   ];
   const { container } = useExcalidrawContainer();
