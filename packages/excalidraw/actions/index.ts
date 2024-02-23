@@ -18,6 +18,7 @@ export {
   actionChangeFontFamily,
   actionChangeFontStyle,
   actionChangeFontWeight,
+  actionChangeTextDecoration,
   actionChangeTextAlign,
   actionChangeVerticalAlign,
 } from "./actionProperties";

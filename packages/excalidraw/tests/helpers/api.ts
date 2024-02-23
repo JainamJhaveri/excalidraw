@@ -116,6 +116,9 @@ export class API {
     fontStyle?: T extends "text" ? ExcalidrawTextElement["fontStyle"] : never;
     fontWeight?: T extends "text" ? ExcalidrawTextElement["fontWeight"] : never;
     fontFamily?: T extends "text" ? ExcalidrawTextElement["fontFamily"] : never;
+    textDecoration?: T extends "text"
+      ? ExcalidrawTextElement["textDecoration"]
+      : never;
     textAlign?: T extends "text" ? ExcalidrawTextElement["textAlign"] : never;
     verticalAlign?: T extends "text"
       ? ExcalidrawTextElement["verticalAlign"]

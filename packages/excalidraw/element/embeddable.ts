@@ -4,6 +4,7 @@ import {
   VERTICAL_ALIGN,
   FONT_STYLE,
   FONT_WEIGHT,
+  TEXT_DECORATION,
 } from "../constants";
 import { ExcalidrawProps } from "../types";
 import { getFontString, updateActiveTool } from "../utils";
@@ -232,8 +233,9 @@ export const createPlaceholderEmbeddableLabel = (
     element.width / 30,
   );
   const fontFamily = FONT_FAMILY.Helvetica;
-  const fontWeight = FONT_WEIGHT.normal;
-  const fontStyle = FONT_STYLE.normal;
+  const fontWeight = FONT_WEIGHT.NONE;
+  const fontStyle = FONT_STYLE.NONE;
+  const textDecoration = TEXT_DECORATION.NONE;
 
   const fontString = getFontString({
     fontSize,
@@ -250,6 +252,7 @@ export const createPlaceholderEmbeddableLabel = (
     backgroundColor: "transparent",
     fontFamily,
     fontStyle,
+    textDecoration,
     fontWeight,
     fontSize,
     text: wrapText(text, fontString, element.width - 20),

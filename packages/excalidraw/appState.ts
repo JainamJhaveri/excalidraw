@@ -6,6 +6,7 @@ import {
   DEFAULT_FONT_STYLE,
   DEFAULT_FONT_WEIGHT,
   DEFAULT_TEXT_ALIGN,
+  DEFAULT_TEXT_DECORATION,
   EXPORT_SCALES,
   THEME,
 } from "./constants";
@@ -31,6 +32,7 @@ export const getDefaultAppState = (): Omit<
     currentItemFontSize: DEFAULT_FONT_SIZE,
     currentItemFontWeight: DEFAULT_FONT_WEIGHT,
     currentItemFontStyle: DEFAULT_FONT_STYLE,
+    currentItemTextDecoration: DEFAULT_TEXT_DECORATION,
     currentItemOpacity: DEFAULT_ELEMENT_PROPS.opacity,
     currentItemRoughness: DEFAULT_ELEMENT_PROPS.roughness,
     currentItemStartArrowhead: null,
@@ -140,6 +142,8 @@ const APP_STATE_STORAGE_CONF = (<
   currentItemFontSize: { browser: true, export: false, server: false },
   currentItemFontStyle: { browser: true, export: false, server: false },
   currentItemFontWeight: { browser: true, export: false, server: false },
+  currentItemTextDecoration: { browser: true, export: false, server: false },
+
   currentItemRoundness: {
     browser: true,
     export: false,

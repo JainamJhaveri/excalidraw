@@ -22,6 +22,7 @@ import {
   ExcalidrawFrameLikeElement,
   ExcalidrawElementType,
   ExcalidrawIframeLikeElement,
+  TextDecorationValues,
 } from "./element/types";
 import { Action } from "./actions/types";
 import { Point as RoughPoint } from "roughjs/bin/geometry";
@@ -242,6 +243,7 @@ export interface AppState {
   currentItemFontStyle: FontStyleValues;
   currentItemFontWeight: FontWeightValues;
   currentItemFontSize: number;
+  currentItemTextDecoration: TextDecorationValues;
   currentItemTextAlign: TextAlign;
   currentItemStartArrowhead: Arrowhead | null;
   currentItemEndArrowhead: Arrowhead | null;

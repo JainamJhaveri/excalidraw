@@ -13,6 +13,7 @@ import {
   DEFAULT_TEXT_ALIGN,
   DEFAULT_FONT_STYLE,
   DEFAULT_FONT_WEIGHT,
+  DEFAULT_TEXT_DECORATION,
 } from "../constants";
 import {
   getBoundTextElement,
@@ -117,11 +118,15 @@ export const actionPasteStyles = register({
             const fontWeight =
               (elementStylesToCopyFrom as ExcalidrawTextElement)?.fontWeight ||
               DEFAULT_FONT_WEIGHT;
+            const textDecoration =
+              (elementStylesToCopyFrom as ExcalidrawTextElement)
+                ?.textDecoration || DEFAULT_TEXT_DECORATION;
             newElement = newElementWith(newElement, {
               fontSize,
               fontFamily,
               fontStyle,
               fontWeight,
+              textDecoration,
               textAlign:
                 (elementStylesToCopyFrom as ExcalidrawTextElement).textAlign ||
                 DEFAULT_TEXT_ALIGN,

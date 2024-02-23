@@ -89,6 +89,7 @@ import {
   TOOL_TYPE,
   EDITOR_LS_KEYS,
   isIOS,
+  TEXT_DECORATION,
 } from "../constants";
 import { ExportedElements, exportCanvas, loadFromBlob } from "../data";
 import Library, { distributeLibraryItemsOnSquareGrid } from "../data/library";
@@ -1346,6 +1347,7 @@ class App extends React.Component<AppProps, AppState> {
               fontFamily: "Assistant",
               fontStyle: "normal",
               fontWeight: "normal",
+              textDecoration: "none",
               fontSize: "14px",
               transform: `translate(-${FRAME_NAME_EDIT_PADDING}px, ${FRAME_NAME_EDIT_PADDING}px)`,
               color: "var(--color-gray-80)",
@@ -1386,6 +1388,7 @@ class App extends React.Component<AppProps, AppState> {
             zIndex: 2,
             fontSize: FRAME_STYLE.nameFontSize,
             fontWeight: "normal",
+            textDecoration: TEXT_DECORATION.NONE,
             color: isDarkTheme
               ? FRAME_STYLE.nameColorDarkTheme
               : FRAME_STYLE.nameColorLightTheme,
@@ -3295,6 +3298,7 @@ class App extends React.Component<AppProps, AppState> {
       fontFamily: this.state.currentItemFontFamily,
       fontStyle: this.state.currentItemFontStyle,
       fontWeight: this.state.currentItemFontWeight,
+      textDecoration: this.state.currentItemTextDecoration,
       textAlign: this.state.currentItemTextAlign,
       verticalAlign: DEFAULT_VERTICAL_ALIGN,
       locked: false,
@@ -4467,7 +4471,10 @@ class App extends React.Component<AppProps, AppState> {
     const fontStyle =
       existingTextElement?.fontStyle || this.state.currentItemFontStyle;
     const fontWeight =
-      existingTextElement?.fontWeight || this.state.currentItemFontStyle;
+      existingTextElement?.fontWeight || this.state.currentItemFontWeight;
+    const textDecoration =
+      existingTextElement?.textDecoration ||
+      this.state.currentItemTextDecoration;
 
     if (
       !existingTextElement &&
@@ -4527,6 +4534,7 @@ class App extends React.Component<AppProps, AppState> {
           fontFamily,
           fontStyle,
           fontWeight,
+          textDecoration,
           textAlign: parentCenterPosition
             ? "center"
             : this.state.currentItemTextAlign,

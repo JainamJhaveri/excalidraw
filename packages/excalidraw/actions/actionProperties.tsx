@@ -53,17 +53,21 @@ import {
   ArrowheadCircleOutlineIcon,
   ArrowheadDiamondIcon,
   ArrowheadDiamondOutlineIcon,
+  TextDecorationUnderline,
+  TextDecorationStrikeThrough,
 } from "../components/icons";
 import {
   DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_STYLE,
   DEFAULT_FONT_WEIGHT,
+  DEFAULT_TEXT_DECORATION,
   FONT_FAMILY,
   FONT_STYLE,
   FONT_WEIGHT,
   ROUNDNESS,
   STROKE_WIDTH,
+  TEXT_DECORATION,
   VERTICAL_ALIGN,
 } from "../constants";
 import {
@@ -89,6 +93,7 @@ import {
   FontFamilyValues,
   FontStyleValues,
   FontWeightValues,
+  TextDecorationValues,
   TextAlign,
   VerticalAlign,
 } from "../element/types";
@@ -1043,19 +1048,19 @@ export const actionChangeFontWeight = register({
           group="font-weight"
           options={[
             {
-              value: FONT_WEIGHT.thin,
+              value: FONT_WEIGHT.THIN,
               text: t("labels.thin"),
               icon: TextFontWeightThin,
               testId: "font-weight-thin",
             },
             {
-              value: FONT_WEIGHT.normal,
+              value: FONT_WEIGHT.NONE,
               text: t("labels.normal"),
               icon: TextFontWeightNormal,
               testId: "font-weight-normal",
             },
             {
-              value: FONT_WEIGHT.bold,
+              value: FONT_WEIGHT.BOLD,
               text: t("labels.bold"),
               icon: TextFontWeightBold,
               testId: "font-weight-bold",
@@ -1139,13 +1144,13 @@ export const actionChangeFontStyle = register({
           group="font-style"
           options={[
             {
-              value: FONT_STYLE.normal,
+              value: FONT_STYLE.NONE,
               text: t("labels.normal"),
               icon: TextFontWeightNormal,
               testId: "font-style-normal",
             },
             {
-              value: FONT_STYLE.italic,
+              value: FONT_STYLE.ITALIC,
               text: t("labels.italic"),
               icon: TextFontStyleItalic,
               testId: "font-style-italic",
@@ -1179,6 +1184,104 @@ export const actionChangeFontStyle = register({
                 : appState.currentItemFontStyle || DEFAULT_FONT_STYLE,
           )}
           onChange={(value) => updateData(value)}
+        />
+      </fieldset>
+    );
+  },
+});
+
+export const actionChangeTextDecoration = register({
+  name: "changeTextDecoration",
+  trackEvent: false,
+  perform: (elements, appState, value, app) => {
+    return {
+      elements: changeProperty(
+        elements,
+        appState,
+        (oldElement) => {
+          if (isTextElement(oldElement)) {
+            const newElement: ExcalidrawTextElement = newElementWith(
+              oldElement,
+              {
+                textDecoration: value,
+                lineHeight: getDefaultLineHeight(value),
+              },
+            );
+            redrawTextBoundingBox(
+              newElement,
+              app.scene.getContainerElement(oldElement),
+              app.scene.getNonDeletedElementsMap(),
+            );
+            return newElement;
+          }
+
+          return oldElement;
+        },
+        true,
+      ),
+      appState: {
+        ...appState,
+        currentItemTextDecoration: value,
+      },
+      commitToHistory: true,
+    };
+  },
+  PanelComponent: ({ elements, appState, updateData, app }) => {
+    return (
+      <fieldset>
+        <legend>{t("labels.textDecoration")}</legend>
+        <ButtonIconSelect<TextDecorationValues | false>
+          group="font-style"
+          options={[
+            {
+              value: TEXT_DECORATION.NONE,
+              text: t("labels.normal"),
+              icon: TextFontWeightNormal,
+              testId: "font-style-normal",
+            },
+            {
+              value: TEXT_DECORATION.UNDERLINE,
+              text: t("labels.underline"),
+              icon: TextDecorationUnderline,
+              testId: "text-decoration-italic",
+            },
+            {
+              value: TEXT_DECORATION["STRIKE-THROUGH"],
+              text: t("labels.strike_through"),
+              icon: TextDecorationStrikeThrough,
+              testId: "text-decoration-strikethrough",
+            },
+          ]}
+          value={getFormValue(
+            elements,
+            appState,
+            (element) => {
+              if (isTextElement(element)) {
+                return element.textDecoration;
+              }
+              const boundTextElement = getBoundTextElement(
+                element,
+                app.scene.getNonDeletedElementsMap(),
+              );
+              if (boundTextElement) {
+                return boundTextElement.textDecoration;
+              }
+              return null;
+            },
+            (element) =>
+              isTextElement(element) ||
+              getBoundTextElement(
+                element,
+                app.scene.getNonDeletedElementsMap(),
+              ) !== null,
+            (hasSelection) =>
+              hasSelection
+                ? null
+                : appState.currentItemTextDecoration || DEFAULT_TEXT_DECORATION,
+          )}
+          onChange={(value) => {
+            updateData(value);
+          }}
         />
       </fieldset>
     );

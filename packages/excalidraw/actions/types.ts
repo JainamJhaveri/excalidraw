@@ -111,6 +111,7 @@ export type ActionName =
   | "increaseFontSize"
   | "changeFontStyle"
   | "changeFontWeight"
+  | "changeTextDecoration"
   | "decreaseFontSize"
   | "unbindText"
   | "hyperlink"

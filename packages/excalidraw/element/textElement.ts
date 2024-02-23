@@ -67,6 +67,7 @@ export const redrawTextBoundingBox = (
     baseline: textElement.baseline,
     fontStyle: textElement.fontStyle,
     fontWeight: textElement.fontWeight,
+    textDecoration: textElement.textDecoration,
   };
 
   boundTextUpdates.text = textElement.text;

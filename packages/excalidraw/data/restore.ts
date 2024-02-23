@@ -33,6 +33,7 @@ import {
   DEFAULT_ELEMENT_PROPS,
   DEFAULT_FONT_STYLE,
   DEFAULT_FONT_WEIGHT,
+  DEFAULT_TEXT_DECORATION,
 } from "../constants";
 import { getDefaultAppState } from "../appState";
 import { LinearElementEditor } from "../element/linearElementEditor";
@@ -221,6 +222,7 @@ const restoreElement = (
         fontStyle: element.fontStyle || DEFAULT_FONT_STYLE,
         fontWeight: element.fontWeight || DEFAULT_FONT_WEIGHT,
         textAlign: element.textAlign || DEFAULT_TEXT_ALIGN,
+        textDecoration: element.textDecoration || DEFAULT_TEXT_DECORATION,
         verticalAlign: element.verticalAlign || DEFAULT_VERTICAL_ALIGN,
         containerId: element.containerId ?? null,
         originalText: element.originalText || text,

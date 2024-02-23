@@ -5,6 +5,7 @@ import {
   FONT_WEIGHT,
   ROUNDNESS,
   TEXT_ALIGN,
+  TEXT_DECORATION,
   THEME,
   VERTICAL_ALIGN,
 } from "../constants";
@@ -26,6 +27,8 @@ export type FontStyleKeys = keyof typeof FONT_STYLE;
 export type FontStyleValues = typeof FONT_STYLE[FontStyleKeys];
 export type FontWeightKeys = keyof typeof FONT_WEIGHT;
 export type FontWeightValues = typeof FONT_WEIGHT[FontWeightKeys];
+export type TextDecorationKeys = keyof typeof TEXT_DECORATION;
+export type TextDecorationValues = typeof TEXT_DECORATION[TextDecorationKeys];
 export type TextAlign = typeof TEXT_ALIGN[keyof typeof TEXT_ALIGN];
 
 type VerticalAlignKeys = keyof typeof VERTICAL_ALIGN;
@@ -183,6 +186,7 @@ export type ExcalidrawTextElement = _ExcalidrawElementBase &
     fontFamily: FontFamilyValues;
     fontStyle: FontStyleValues;
     fontWeight: FontWeightValues;
+    textDecoration: TextDecorationValues;
     text: string;
     baseline: number;
     textAlign: TextAlign;

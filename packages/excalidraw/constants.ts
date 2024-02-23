@@ -5,6 +5,7 @@ import {
   FontFamilyValues,
   FontStyleValues,
   FontWeightValues,
+  TextDecorationValues,
 } from "./element/types";
 import { COLOR_PALETTE } from "./colors";
 export const isDarwin = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
@@ -131,14 +132,20 @@ export const FONT_FAMILY = {
 };
 
 export const FONT_WEIGHT = {
-  thin: "lighter",
-  normal: "normal",
-  bold: "bold",
+  THIN: "lighter",
+  NONE: "normal",
+  BOLD: "bold",
 };
 
 export const FONT_STYLE = {
-  normal: "normal",
-  italic: "italic",
+  NONE: "normal",
+  ITALIC: "italic",
+};
+
+export const TEXT_DECORATION = {
+  NONE: "none",
+  UNDERLINE: "underline",
+  "STRIKE-THROUGH": "line-through",
 };
 
 export const THEME = {
@@ -169,6 +176,8 @@ export const DEFAULT_FONT_SIZE = 20;
 export const DEFAULT_FONT_FAMILY: FontFamilyValues = FONT_FAMILY.Virgil;
 export const DEFAULT_FONT_STYLE: FontStyleValues = "normal";
 export const DEFAULT_FONT_WEIGHT: FontWeightValues = "normal";
+export const DEFAULT_TEXT_DECORATION: TextDecorationValues =
+  TEXT_DECORATION.NONE;
 export const DEFAULT_TEXT_ALIGN = "left";
 export const DEFAULT_VERTICAL_ALIGN = "top";
 export const DEFAULT_VERSION = "{version}";

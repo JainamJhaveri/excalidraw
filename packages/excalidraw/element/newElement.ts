@@ -19,6 +19,7 @@ import {
   ExcalidrawMagicFrameElement,
   ExcalidrawIframeElement,
   ElementsMap,
+  TextDecorationValues,
 } from "./types";
 import {
   arrayToMap,
@@ -49,6 +50,7 @@ import {
   VERTICAL_ALIGN,
   DEFAULT_FONT_STYLE,
   DEFAULT_FONT_WEIGHT,
+  DEFAULT_TEXT_DECORATION,
 } from "../constants";
 import { MarkOptional, Merge, Mutable } from "../utility-types";
 
@@ -220,6 +222,7 @@ export const newTextElement = (
     fontFamily?: FontFamilyValues;
     fontStyle?: FontStyleValues;
     fontWeight?: FontWeightValues;
+    textDecoration?: TextDecorationValues;
     textAlign?: TextAlign;
     verticalAlign?: VerticalAlign;
     containerId?: ExcalidrawTextContainer["id"] | null;
@@ -231,6 +234,7 @@ export const newTextElement = (
   const fontSize = opts.fontSize || DEFAULT_FONT_SIZE;
   const fontStyle = opts.fontStyle || DEFAULT_FONT_STYLE;
   const fontWeight = opts.fontWeight || DEFAULT_FONT_WEIGHT;
+  const textDecoration = opts.textDecoration || DEFAULT_TEXT_DECORATION;
   const lineHeight = opts.lineHeight || getDefaultLineHeight(fontFamily);
   const text = normalizeText(opts.text);
   const metrics = measureText(
@@ -253,6 +257,7 @@ export const newTextElement = (
       fontFamily,
       fontStyle,
       fontWeight,
+      textDecoration,
       textAlign,
       verticalAlign,
       x: opts.x - offsets.x,

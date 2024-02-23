@@ -53,6 +53,7 @@ import {
   MAX_DECIMALS_FOR_SVG_EXPORT,
   MIME_TYPES,
   SVG_NS,
+  TEXT_DECORATION,
 } from "../constants";
 import { getStroke, StrokeOptions } from "perfect-freehand";
 import {
@@ -401,8 +402,40 @@ const drawElementOnCanvas = (
           element.fontSize,
           element.lineHeight,
         );
+
         const verticalOffset = element.height - element.baseline;
         for (let index = 0; index < lines.length; index++) {
+          if (element.textDecoration === TEXT_DECORATION.UNDERLINE) {
+            let textWidth = context.measureText(lines[index]).width;
+            let textHeight = 1.25 * element.fontSize;
+            let underlineY =
+              lineHeightPx -
+              verticalOffset +
+              index * textHeight +
+              0.1 * element.fontSize;
+
+            context.beginPath();
+            context.moveTo(horizontalOffset, underlineY);
+            context.lineTo(horizontalOffset + textWidth, underlineY);
+            context.strokeStyle = element.strokeColor;
+            context.lineWidth = element.fontSize / 10;
+            context.stroke();
+          } else if (
+            element.textDecoration === TEXT_DECORATION["STRIKE-THROUGH"]
+          ) {
+            let textWidth = context.measureText(lines[index]).width;
+            let textHeight = 1.25 * element.fontSize;
+
+            let underlineY =
+              (lineHeightPx - verticalOffset) / 1.5 + index * textHeight;
+
+            context.beginPath();
+            context.moveTo(horizontalOffset, underlineY);
+            context.lineTo(horizontalOffset + textWidth, underlineY);
+            context.strokeStyle = element.strokeColor;
+            context.lineWidth = element.fontSize / 10;
+            context.stroke();
+          }
           context.fillText(
             lines[index],
             horizontalOffset,
@@ -1429,8 +1462,8 @@ export const renderElementToSvg = (
           text.setAttribute("y", `${i * lineHeightPx}`);
           text.setAttribute("font-family", getFontFamilyString(element));
           text.setAttribute("font-size", `${element.fontSize}px`);
-          text.setAttribute("font-style", `${element.fontStyle}`);
-          text.setAttribute("font-weight", `${element.fontWeight}`);
+          text.setAttribute("font-style", `normal`);
+          text.setAttribute("font-weight", `thin`);
           text.setAttribute("fill", element.strokeColor);
           text.setAttribute("text-anchor", textAnchor);
           text.setAttribute("style", "white-space: pre;");

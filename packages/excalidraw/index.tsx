@@ -239,6 +239,7 @@ export {
   ROUNDNESS,
   FONT_STYLE,
   FONT_WEIGHT,
+  TEXT_DECORATION,
 } from "./constants";
 
 export {

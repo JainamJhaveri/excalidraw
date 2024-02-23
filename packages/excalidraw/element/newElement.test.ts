@@ -81,6 +81,7 @@ describe("duplicating single elements", () => {
       fontSize: 20,
       fontFamily: FONT_FAMILY.Virgil,
       fontStyle: "normal",
+      textDecoration: "none",
       textAlign: "left",
       verticalAlign: "top",
     });
