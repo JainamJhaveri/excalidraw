@@ -403,6 +403,8 @@ const drawElementOnCanvas = (
           element.lineHeight,
         );
 
+        const underlineOriginX = 0;
+
         const verticalOffset = element.height - element.baseline;
         for (let index = 0; index < lines.length; index++) {
           if (element.textDecoration === TEXT_DECORATION.UNDERLINE) {
@@ -415,8 +417,8 @@ const drawElementOnCanvas = (
               0.1 * element.fontSize;
 
             context.beginPath();
-            context.moveTo(horizontalOffset, underlineY);
-            context.lineTo(horizontalOffset + textWidth, underlineY);
+            context.moveTo(underlineOriginX, underlineY);
+            context.lineTo(underlineOriginX + textWidth, underlineY);
             context.strokeStyle = element.strokeColor;
             context.lineWidth = element.fontSize / 10;
             context.stroke();
@@ -430,8 +432,8 @@ const drawElementOnCanvas = (
               (lineHeightPx - verticalOffset) / 1.5 + index * textHeight;
 
             context.beginPath();
-            context.moveTo(horizontalOffset, underlineY);
-            context.lineTo(horizontalOffset + textWidth, underlineY);
+            context.moveTo(underlineOriginX, underlineY);
+            context.lineTo(underlineOriginX + textWidth, underlineY);
             context.strokeStyle = element.strokeColor;
             context.lineWidth = element.fontSize / 10;
             context.stroke();
